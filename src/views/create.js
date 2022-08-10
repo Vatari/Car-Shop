@@ -5,8 +5,8 @@ import * as service from "../api/services.js";
 const createTemplate = (onCreate) => html` <section id="create-listing">
   <div class="container">
     <form @submit=${onCreate} id="create-form">
-      <h1>Create Car Listing</h1>
-      <p>Please fill in this form to create an listing.</p>
+      <h1>Add car for sale</h1>
+      <p>Please fill in this form</p>
       <hr />
 
       <p>Car Brand</p>

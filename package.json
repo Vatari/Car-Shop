@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "test": "mocha tests",
-     "dev": "lite-server"
+     "start": "lite-server"
   },
   "author": "",
   "license": "ISC",

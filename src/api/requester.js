@@ -1,4 +1,4 @@
-import { clearUserData, getAccessToken, getuserData } from "../util.js";
+import { clearUserData, getAccessToken } from "../util.js";
 
 const appId = "A00A5B4F-A9B5-8699-FFD6-B1FDFA0D8F00";
 const apiKey = "6497A672-9CE3-4BA0-978C-1346660C63D5";
@@ -18,6 +18,7 @@ async function request(method, url, data) {
 
   const userData = JSON.parse(localStorage.getItem("userData"));
 
+  
   if (userData !== null) {
     options.headers["user-token"] = getAccessToken();
   }

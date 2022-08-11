@@ -1,5 +1,5 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
-import { createSubmitHandler } from "../util.js";
+import { createSubmitHandler, getAccessToken, getuserData } from "../util.js";
 import * as userService from "../api/user.js";
 
 const registerTemplate = (onRegister) => html`<section id="register">

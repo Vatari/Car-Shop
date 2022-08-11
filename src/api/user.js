@@ -17,6 +17,7 @@ export async function register(username, password) {
     email: username,
     password,
   });
+
   setUserData(result);
   return result;
 }

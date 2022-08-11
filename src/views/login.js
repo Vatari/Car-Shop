@@ -1,6 +1,7 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
 import { createSubmitHandler } from "../util.js";
 import * as userService from "../api/user.js";
+import { notify } from "./notify.js";
 
 const loginTemplate = (onLogin) => html` <section id="login">
   <div class="container">
@@ -27,6 +28,9 @@ export function loginPage(ctx) {
 }
 
 async function onLogin(ctx, data, ev) {
+  if (data.username == "" || data.password == "") {
+    return notify("All fields are required!");
+  }
   await userService.login(data.username, data.password);
   ev.target.reset();
   ctx.page.redirect("/");

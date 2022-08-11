@@ -1,4 +1,5 @@
 import { clearUserData, getAccessToken } from "../util.js";
+import { notify } from "../views/notify.js";
 
 const appId = "A00A5B4F-A9B5-8699-FFD6-B1FDFA0D8F00";
 const apiKey = "6497A672-9CE3-4BA0-978C-1346660C63D5";
@@ -40,7 +41,7 @@ async function request(method, url, data) {
       return await res.json();
     }
   } catch (err) {
-    alert(err.message);
+    notify(err.message);
     throw err;
   }
 }

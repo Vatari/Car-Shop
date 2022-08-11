@@ -1,6 +1,12 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
-import { clearUserData, createSubmitHandler, getAccessToken, getuserData } from "../util.js";
+import {
+  clearUserData,
+  createSubmitHandler,
+  getAccessToken,
+  getuserData,
+} from "../util.js";
 import * as userService from "../api/user.js";
+import { notify } from "./notify.js";
 
 const registerTemplate = (onRegister) => html`<section id="register">
   <div class="container">
@@ -10,12 +16,7 @@ const registerTemplate = (onRegister) => html`<section id="register">
       <hr />
 
       <p>Email</p>
-      <input
-        type="text"
-        placeholder="Enter Email"
-        name="username"
-        required
-      />
+      <input type="text" placeholder="Enter Email" name="username" required />
 
       <p>Password</p>
       <input
@@ -47,14 +48,14 @@ export function registerPage(ctx) {
 }
 async function onRegister(ctx, data, ev) {
   if (data.username == "" || data.password == "") {
-    return alert("All fields are required!");
+    return notify("All fields are required!");
   }
   if (data.password != data["repeatPass"]) {
-    return alert("Passwords don't match!");
+    return notify("Passwords don't match!");
   }
 
   await userService.register(data.username, data.password);
   ev.target.reset();
-  clearUserData()
+  clearUserData();
   ctx.page.redirect("/login");
 }

@@ -17,8 +17,8 @@ export async function getRecent(ctx) {
 }
 
 export async function getAll() {
-  const data = await api.get(endpoints.listings);
-  setObjectData(data);
+ /*  const data = await api.get(endpoints.listings);
+  //setObjectData(data); */
   return api.get(endpoints.listings);
 }
 

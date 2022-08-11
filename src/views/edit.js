@@ -58,6 +58,14 @@ const editTemplate = (item, onEdit) => html`
           .value=${item.price}
         />
 
+        <p>Phone</p>
+        <input
+          type="text"
+          placeholder="enter phone number"
+          name="phone"
+          .value=${item.phone}
+        />
+
         <hr />
         <input type="submit" class="registerbtn" value="Edit Listing" />
       </form>

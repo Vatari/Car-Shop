@@ -12,6 +12,8 @@ const detailsTemplate = (item, onDelete) => html`
         <li><span>Model:</span>${item.model}</li>
         <li><span>Year:</span>${item.year}</li>
         <li><span>Price:</span>${item.price}$</li>
+        <li><span>Seller:</span>${item.phone}</li>
+
       </ul>
 
       <p class="description-para">${item.description}</p>

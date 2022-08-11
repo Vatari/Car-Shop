@@ -27,6 +27,9 @@ const createTemplate = (onCreate) => html` <section id="create-listing">
       <p>Car Price</p>
       <input type="number" placeholder="Enter Car Price" name="price" />
 
+      <p>Phone</p>
+      <input type="text" placeholder="Enter your phone" name="phone" />
+
       <hr />
       <input type="submit" class="registerbtn" value="Create Listing" />
     </form>
@@ -51,6 +54,7 @@ async function onCreate(ctx, item, ev) {
     year: Number(item.year),
     imageUrl: item.imageUrl,
     price: Number(item.price),
+    phone: item.phone
   };
   await service.create(data);
   ev.target.reset();

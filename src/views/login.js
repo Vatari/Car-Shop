@@ -9,8 +9,8 @@ const loginTemplate = (onLogin) => html` <section id="login">
       <p>Please enter your credentials.</p>
       <hr />
 
-      <p>Username</p>
-      <input placeholder="Enter Username" name="username" type="text" />
+      <p>Email</p>
+      <input placeholder="Enter Email" name="username" type="text" />
 
       <p>Password</p>
       <input type="password" placeholder="Enter Password" name="password" />

@@ -9,10 +9,10 @@ const registerTemplate = (onRegister) => html`<section id="register">
       <p>Please fill in this form to create an account.</p>
       <hr />
 
-      <p>Username</p>
+      <p>Email</p>
       <input
         type="text"
-        placeholder="Enter Username"
+        placeholder="Enter Email"
         name="username"
         required
       />

@@ -50,7 +50,11 @@ export async function searchPage(ctx) {
   ctx.render(searchTemplate(items, onSearch, year));
 
   function onSearch(ev) {
+    ev.preventDefault();
     const query = Number(document.querySelector("#search-input").value);
+    if (query =='') {
+      return
+    }
 
     ctx.page.redirect(`/search?query=${query}`);
   }

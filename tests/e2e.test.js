@@ -138,10 +138,9 @@ describe("E2E tests", function () {
         onRequest(),
         page.click("nav >> text=Logout"),
       ]);
-
       const token = request.headers()["user-token"];
       expect(request.method()).to.equal("GET");
-      expect(token).to.equal(data['user-token']);
+      expect(token).to.equal(data["user-token"]);
     });
   });
 
@@ -163,11 +162,10 @@ describe("E2E tests", function () {
       //Test for navigation
       await page.waitForTimeout(interval);
 
-      expect(await page.isVisible("nav >> text=All Listings")).to.be.true;
-      expect(await page.isVisible("nav >> text=By Year")).to.be.true;
-      expect(await page.isVisible("nav >> text=Peter")).to.be.true;
-      expect(await page.isVisible("nav >> text=My Listings")).to.be.true;
-      expect(await page.isVisible("nav >> text=Create Listing")).to.be.true;
+      expect(await page.isVisible("nav >> text=All cars")).to.be.true;
+      expect(await page.isVisible("nav >> text=Search by year")).to.be.true;
+      expect(await page.isVisible("nav >> text=My cars")).to.be.true;
+      expect(await page.isVisible("nav >> text=Add car")).to.be.true;
       expect(await page.isVisible("nav >> text=Logout")).to.be.true;
 
       expect(await page.isVisible("nav >> text=Login")).to.be.false;
@@ -178,14 +176,14 @@ describe("E2E tests", function () {
       await page.goto(host);
       await page.waitForTimeout(interval);
 
-      expect(await page.isVisible("nav >> text=All Listings")).to.be.true;
-      expect(await page.isVisible("nav >> text=By Year")).to.be.true;
+      expect(await page.isVisible("nav >> text=All cars")).to.be.true;
+      expect(await page.isVisible("nav >> text=Search by Year")).to.be.true;
       expect(await page.isVisible("nav >> text=Login")).to.be.true;
       expect(await page.isVisible("nav >> text=Register")).to.be.true;
 
       expect(await page.isVisible("nav >> text=Welcome")).to.be.false;
-      expect(await page.isVisible("nav >> text=My Listings")).to.be.false;
-      expect(await page.isVisible("nav >> text=Create Listing")).to.be.false;
+      expect(await page.isVisible("nav >> text=My cars")).to.be.false;
+      expect(await page.isVisible("nav >> text=Add car")).to.be.false;
       expect(await page.isVisible("nav >> text=Logout")).to.be.false;
     });
   });
@@ -195,75 +193,13 @@ describe("E2E tests", function () {
       await page.goto(host);
       await page.waitForTimeout(interval);
 
-      await page.waitForSelector("text=Welcome To Car Tube");
+      await page.waitForSelector("text=Welcome To Car Shop");
 
       expect(
-        await page.isVisible(
-          "text=To see all the listings click the link below"
-        )
+        await page.isVisible("text=To see all the cars click the link below")
       ).to.be.true;
-      expect(await page.isVisible("#welcome-container >> text=Listings")).to.be
+      expect(await page.isVisible("#welcome-container >> text=All cars")).to.be
         .true;
-    });
-
-    it("show all listings [ 10 Points ]", async () => {
-      await page.goto(host);
-      await page.waitForTimeout(interval);
-      await page.click("text=All Listings");
-      await page.waitForTimeout(interval);
-      await page.waitForSelector("#car-listings");
-
-      const titles = await page.$$eval("#car-listings .listing h2", (t) =>
-        t.map((s) => s.textContent)
-      );
-
-      expect(titles.length).to.equal(3);
-      expect(titles[0]).to.contains("brand1 model1");
-      expect(titles[1]).to.contains("brand2 model2");
-      expect(titles[2]).to.contains("brand3 model3");
-    });
-
-    it("show car details [ 5 Points ]", async () => {
-      const data = mockData.catalog[0];
-
-      await page.goto(host);
-      await page.waitForTimeout(interval);
-      await page.click("text=All Listings");
-      await page.waitForTimeout(interval);
-      await page.waitForSelector("#car-listings");
-      await page.click('.listing:has-text("brand1") >> text=Details');
-      await page.waitForTimeout(interval);
-      await page.waitForSelector(".details-info");
-
-      expect(await page.getAttribute(".details-info img", "src")).to.contains(
-        data.imageUrl
-      );
-      expect(await page.textContent('li:has-text("Brand")')).to.contains(
-        data.brand
-      );
-      expect(await page.textContent('li:has-text("Model")')).to.contains(
-        data.model
-      );
-      expect(await page.textContent('li:has-text("Year")')).to.contains(
-        data.year
-      );
-      expect(await page.textContent('li:has-text("Price")')).to.contains(
-        data.price
-      );
-    });
-
-    it("guest does NOT see edit/delete buttons [ 5 Points ]", async () => {
-      await page.goto(host);
-      await page.waitForTimeout(interval);
-      await page.click("text=All Listings");
-      await page.waitForTimeout(interval);
-      await page.waitForSelector("#car-listings");
-      await page.click('.listing:has-text("brand1") >> text=Details');
-      await page.waitForTimeout(interval);
-      await page.waitForSelector(".details-info");
-
-      expect(await page.isVisible('text="Delete"')).to.be.false;
-      expect(await page.isVisible('text="Edit"')).to.be.false;
     });
   });
 

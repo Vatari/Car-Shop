@@ -37,6 +37,9 @@ const createTemplate = (onCreate) => html` <section id="create-listing">
 </section>`;
 
 export function createPage(ctx) {
+  if (!ctx.user) {
+    ctx.page.redirect("/login");
+  }
   ctx.render(createTemplate(createSubmitHandler(ctx, onCreate)));
 }
 
@@ -54,7 +57,7 @@ async function onCreate(ctx, item, ev) {
     year: Number(item.year),
     imageUrl: item.imageUrl,
     price: Number(item.price),
-    phone: item.phone
+    phone: item.phone,
   };
   await service.create(data);
   ev.target.reset();

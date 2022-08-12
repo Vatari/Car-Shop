@@ -2,21 +2,21 @@
     "users": [
         {
             "_id": "0001",
-            "username": "Peter",
+            "username": "peter@abv.bg",
             "password": "123456",
-            "accessToken": "AAAA"
+            "user-token": "AAAA"
         },
         {
             "_id": "0002",
-            "username": "John",
+            "username": "john@abv.bg",
             "password": "123456",
-            "accessToken": "BBBB"
+            "user-token": "BBBB"
         }
     ],
     "catalog": [
         {
-            "_id": "1001",
-            "_ownerId": "0001",
+            "objectId": "1001",
+            "ownerId": "0001",
             "brand": "brand1",
             "model": "model1",
             "description": "description1",
@@ -25,24 +25,14 @@
             "price": 1000
         },
         {
-            "_id": "1002",
-            "_ownerId": "0001",
+            "objectId": "1002",
+            "ownerId": "0001",
             "brand": "brand2",
             "model": "model2",
             "description": "description2",
             "year": 2012,
-            "imageUrl": "/images/2.png",
             "price": 2000
-        },
-        {
-            "_id": "1003",
-            "_ownerId": "0002",
-            "brand": "brand3",
-            "model": "model3",
-            "description": "description3",
-            "year": 2013,
-            "imageUrl": "/images/3.png",
-            "price": 3000
         }
+  
     ]
 }

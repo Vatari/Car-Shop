@@ -141,7 +141,7 @@ describe("E2E tests", function () {
 
       const token = request.headers()["user-token"];
       expect(request.method()).to.equal("GET");
-      expect(token).to.equal(data.accessToken);
+      expect(token).to.equal(data['user-token']);
     });
   });
 

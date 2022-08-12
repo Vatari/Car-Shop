@@ -5,7 +5,10 @@
   "main": "index.html",
   "scripts": {
     "test": "mocha tests",
-    "start": "browser-sync start --no-open --server --files --port $PORT \"dist/css/*.css, dist/js/*.js, **/*.html, !node_modules/**/*.html\""
+    "start": "browser-sync start --no-open --server --files --port $PORT \"dist/css/*.css, dist/js/*.js, **/*.html, !node_modules/**/*.html\"",
+    "local" : "lite-server"
+    
+  
   },
   "author": "",
   "license": "ISC",

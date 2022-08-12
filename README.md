@@ -16,6 +16,6 @@ Installation:
 2. install node.js
 3. open command prompt or terminal and run npm init -y
 4. run npm i
-5. run npm start
-6. open browser at http://localhost:3000 or http://127.0.0.1:3000
+5. run npm run local
+6. browser shoud open at http://localhost:3000 or http://127.0.0.1:3000
 7. enjoy

@@ -7,6 +7,9 @@ Authorization for users uses token.
 
 package.json installs lite-server.
 
+
+live demo here: https://project-car-shop.herokuapp.com/
+
 Installation:
 
 1. Download zipped folder

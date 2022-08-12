@@ -14,8 +14,8 @@ Installation:
 
 1. Download zipped folder
 2. install node.js
-3. open command prompt or terminal and run npm init -y
-4. run npm i
-5. run npm run local
+3. open command prompt or terminal and run "npm init -y"
+4. run "npm i"
+5. run "npm run local"
 6. browser shoud open at http://localhost:3000 or http://127.0.0.1:3000
 7. enjoy

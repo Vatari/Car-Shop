@@ -45,8 +45,8 @@ describe("E2E tests", function () {
   });
 
   // Test proper
-  describe("Authentication [ 20 Points ]", () => {
-    it("register does not work with empty fields [ 5 Points ]", async () => {
+  describe("Authentication", () => {
+    it("register does not work with empty fields", async () => {
       const { post } = await handle(endpoints.register);
       const isCalled = post().isHandled;
 
@@ -64,7 +64,7 @@ describe("E2E tests", function () {
       expect(isCalled()).to.be.false;
     });
 
-    it("register makes correct API call [ 5 Points ]", async () => {
+    it("register makes correct API call", async () => {
       const data = mockData.users[0];
       const { post } = await handle(endpoints.register);
       const { onRequest } = post(data);
@@ -91,7 +91,7 @@ describe("E2E tests", function () {
       expect(postData.password).to.equal(data.password);
     });
 
-    it("login makes correct API call [ 5 Points ]", async () => {
+    it("login makes correct API call", async () => {
       const data = mockData.users[0];
       const { post } = await handle(endpoints.login);
       const { onRequest } = post(data);
@@ -116,7 +116,7 @@ describe("E2E tests", function () {
       expect(postData.password).to.equal(data.password);
     });
 
-    it("logout makes correct API call [ 5 Points ]", async () => {
+    it("logout makes correct API call", async () => {
       const data = mockData.users[0];
       const { post } = await handle(endpoints.login);
       const { get } = await handle(endpoints.logout);
@@ -144,8 +144,8 @@ describe("E2E tests", function () {
     });
   });
 
-  describe("Navigation bar [ 5 Points ]", () => {
-    it("logged user should see correct navigation [ 2.5 Points ]", async () => {
+  describe("Navigation bar", () => {
+    it("logged user should see correct navigation", async () => {
       // Login user
       const data = mockData.users[0];
       await page.goto(host);
@@ -172,7 +172,7 @@ describe("E2E tests", function () {
       expect(await page.isVisible("nav >> text=Register")).to.be.false;
     });
 
-    it("guest user should see correct navigation [ 2.5 Points ]", async () => {
+    it("guest user should see correct navigation", async () => {
       await page.goto(host);
       await page.waitForTimeout(interval);
 
@@ -188,8 +188,8 @@ describe("E2E tests", function () {
     });
   });
 
-  describe("Catalog [ 25 Points ]", () => {
-    it("loads static home page [ 5 Points ]", async () => {
+  describe("Catalog", () => {
+    it("loads static home page", async () => {
       await page.goto(host);
       await page.waitForTimeout(interval);
 
@@ -203,7 +203,7 @@ describe("E2E tests", function () {
     });
   });
 
-  describe("CRUD [ 40 Points ]", () => {
+  describe("CRUD", () => {
     // Login user
     beforeEach(async () => {
       const data = mockData.users[0];
@@ -218,11 +218,11 @@ describe("E2E tests", function () {
       await page.waitForTimeout(interval);
     });
 
-    it("create does NOT work with empty fields [ 5 Points ]", async () => {
+    it("create does NOT work with empty fields", async () => {
       const { post } = await handle(endpoints.create);
       const isCalled = post().isHandled;
 
-      await page.click('text="Create Listing"');
+      await page.click('text="Add car"');
       await page.waitForTimeout(interval);
       await page.waitForSelector("form");
 
@@ -233,12 +233,12 @@ describe("E2E tests", function () {
       expect(isCalled()).to.be.false;
     });
 
-    it("create makes correct API call for logged in user [ 10 Points ]", async () => {
+    it("create makes correct API call for logged in user", async () => {
       const data = mockData.catalog[0];
       const { post } = await handle(endpoints.create);
       const { onRequest } = post();
 
-      await page.click('text="Create Listing"');
+      await page.click('text="Add car"');
       await page.waitForTimeout(interval);
       await page.waitForSelector("form");
 
@@ -248,6 +248,7 @@ describe("E2E tests", function () {
       await page.fill('[name="year"]', data.year.toString());
       await page.fill('[name="imageUrl"]', data.imageUrl);
       await page.fill('[name="price"]', data.price.toString());
+      await page.fill('[name="phone"]', data.phone);
 
       const [request] = await Promise.all([
         onRequest(),
@@ -262,200 +263,12 @@ describe("E2E tests", function () {
       expect(postData.year).to.equal(data.year);
       expect(postData.imageUrl).to.equal(data.imageUrl);
       expect(postData.price).to.equal(data.price);
-    });
-
-    it("non-author does NOT see delete and edit buttons [ 2.5 Points ]", async () => {
-      await page.click("text=All Listings");
-      await page.waitForTimeout(interval);
-      await page.waitForSelector("#car-listings");
-      await page.click('.listing:has-text("brand3") >> text=Details');
-      await page.waitForTimeout(interval);
-      await page.waitForSelector(".details-info");
-
-      expect(await page.isVisible('text="Delete"')).to.be.false;
-      expect(await page.isVisible('text="Edit"')).to.be.false;
-    });
-
-    it("author sees delete and edit buttons [ 2.5 Points ]", async () => {
-      await page.click("text=All Listings");
-      await page.waitForTimeout(interval);
-      await page.waitForSelector("#car-listings");
-      await page.click('.listing:has-text("brand1") >> text=Details');
-      await page.waitForTimeout(interval);
-      await page.waitForSelector(".details-info");
-
-      expect(await page.isVisible('text="Delete"')).to.be.true;
-      expect(await page.isEnabled('text="Delete"')).to.be.true;
-      expect(await page.isVisible('text="Edit"')).to.be.true;
-      expect(await page.isEnabled('text="Edit"')).to.be.true;
-    });
-
-    it("delete makes correct API call for logged in user [ 5 Points ]", async () => {
-      const data = mockData.catalog[0];
-      const { get, del } = await handle(endpoints.delete(data._id));
-      get(data);
-      const { onResponse, isHandled } = del();
-
-      await page.click("text=All Listings");
-      await page.waitForTimeout(interval);
-
-      await page.waitForSelector("#car-listings");
-      await page.click('.listing:has-text("brand1") >> text=Details');
-      await page.waitForTimeout(interval);
-
-      await page.waitForSelector(".details-info");
-      await page.waitForTimeout(interval);
-
-      page.on("dialog", (dialog) => dialog.accept());
-
-      await Promise.all([onResponse(), page.click('text="Delete"')]);
-
-      expect(isHandled()).to.be.true;
-    });
-
-    it("edit does NOT work with empty fields [ 5 Points ]", async () => {
-      const data = mockData.catalog[0];
-      const { get, put } = await handle(endpoints.delete(data._id));
-      get(data);
-      const { isHandled } = put();
-
-      await page.click("text=All Listings");
-      await page.waitForTimeout(interval);
-
-      await page.waitForSelector("#car-listings");
-      await page.click('.listing:has-text("brand1") >> text=Details');
-      await page.waitForTimeout(interval);
-
-      await page.waitForSelector(".details-info");
-      await page.click("text=Edit");
-      await page.waitForTimeout(interval);
-
-      await page.waitForSelector("form");
-      await page.fill('[name="brand"]', "");
-      await page.fill('[name="model"]', "");
-      await page.fill('[name="description"]', "");
-      await page.fill('[name="year"]', "");
-      await page.fill('[name="imageUrl"]', "");
-      await page.fill('[name="price"]', "");
-
-      await page.click('[type="submit"]');
-      await page.waitForTimeout(interval);
-
-      expect(isHandled()).to.be.false;
-    });
-
-    it("edit should populate form with correct data [ 5 Points ]", async () => {
-      const data = mockData.catalog[0];
-      const { get } = await handle(endpoints.delete(data._id));
-      get(data);
-
-      await page.click("text=All Listings");
-      await page.waitForTimeout(interval);
-      await page.waitForSelector("#car-listings");
-      await page.click('.listing:has-text("brand1") >> text=Details');
-      await page.waitForTimeout(interval);
-      await page.waitForSelector(".details-info");
-      await page.click("text=Edit");
-      await page.waitForTimeout(interval);
-      await page.waitForSelector("form");
-
-      const inputs = await page.$$eval(".container input", (t) =>
-        t.map((i) => i.value)
-      );
-      expect(inputs[0]).to.contains(data.brand);
-      expect(inputs[1]).to.contains(data.model);
-      expect(inputs[2]).to.contains(data.description);
-      expect(inputs[3]).to.contains(data.year);
-      expect(inputs[4]).to.contains(data.imageUrl);
-      expect(inputs[5]).to.contains(data.price);
-    });
-
-    it("edit makes correct API call for logged in user [ 5 Points ]", async () => {
-      const data = mockData.catalog[0];
-      const { get, put } = await handle(endpoints.delete(data._id));
-      get(data);
-      const { onRequest } = put();
-
-      await page.click("text=All Listings");
-      await page.waitForTimeout(interval);
-      await page.waitForSelector("#car-listings");
-      await page.click('.listing:has-text("brand1") >> text=Details');
-      await page.waitForTimeout(interval);
-      await page.waitForSelector(".details-info");
-      await page.click("text=Edit");
-      await page.waitForTimeout(interval);
-      await page.waitForSelector("form");
-
-      await page.fill('[name="brand"]', data.brand + "edit");
-      await page.fill('[name="model"]', data.model + "edit");
-      await page.fill('[name="description"]', data.description + "edit");
-      await page.fill('[name="year"]', (data.year + 1).toString());
-      await page.fill('[name="imageUrl"]', data.imageUrl + "edit");
-      await page.fill('[name="price"]', (data.price + 1).toString());
-
-      const [request] = await Promise.all([
-        onRequest(),
-        page.click('[type="submit"]'),
-      ]);
-
-      const postData = JSON.parse(request.postData());
-
-      expect(postData.brand).to.contains(data.brand + "edit");
-      expect(postData.model).to.contains(data.model + "edit");
-      expect(postData.description).to.contains(data.description + "edit");
-      expect(postData.year).to.equal(data.year + 1);
-      expect(postData.imageUrl).to.contains(data.imageUrl + "edit");
-      expect(postData.price).to.equal(data.price + 1);
+      expect(postData.phone).to.equal(data.phone);
     });
   });
 
-  describe("User Profile Page [ 10 Points ]", async () => {
-    // Login user
-    beforeEach(async () => {
-      const data = mockData.users[0];
-      await page.goto(host);
-      await page.waitForTimeout(interval);
-      await page.click("text=Login");
-      await page.waitForTimeout(interval);
-      await page.waitForSelector("form");
-      await page.fill('[name="username"]', data.username);
-      await page.fill('[name="password"]', data.password);
-      await page.click('[type="submit"]');
-      await page.waitForTimeout(interval);
-    });
-
-    it("check profile page for with 0 listings [ 5 Points ]", async () => {
-      const { get } = await handle(endpoints.profile(mockData.users[0]._id));
-      get([]);
-
-      await page.click("text=My Listings");
-      await page.waitForTimeout(interval);
-
-      const visible = await page.isVisible(
-        "text=You haven't listed any cars yet"
-      );
-      expect(visible).to.be.true;
-    });
-
-    it("check profile page with 2 listings [ 5 Points ]", async () => {
-      const { get } = await handle(endpoints.profile(mockData.users[0]._id));
-      get(mockData.catalog.slice(0, 2));
-
-      await page.click("text=My Listings");
-      await page.waitForTimeout(interval);
-
-      const titles = await page.$$eval("#my-listings .listing h2", (t) =>
-        t.map((s) => s.textContent)
-      );
-
-      expect(titles.length).to.equal(2);
-      expect(titles[0]).to.contains("brand1 model1");
-      expect(titles[1]).to.contains("brand2 model2");
-    });
-  });
-
-  describe("Search Page [ 5 Points ]", async () => {
-    it("show no matches [ 2.5 Points ]", async () => {
+  describe("Search Page", async () => {
+    it("show no matches", async () => {
       await handle(endpoints.search("2010"), { get: [] });
 
       await page.goto(host);
@@ -475,7 +288,7 @@ describe("E2E tests", function () {
       expect(matches.length).to.be.equal(0);
     });
 
-    it("show results [ 2.5 Points ]", async () => {
+    it("show results", async () => {
       await handle(endpoints.search("2010"), {
         get: mockData.catalog.slice(0, 2),
       });

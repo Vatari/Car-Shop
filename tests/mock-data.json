@@ -15,23 +15,26 @@
     ],
     "catalog": [
         {
-            "objectId": "1001",
-            "ownerId": "0001",
+            "_id": "1001",
+            "_ownerId": "0001",
             "brand": "brand1",
             "model": "model1",
             "description": "description1",
             "year": 2011,
             "imageUrl": "/images/1.png",
-            "price": 1000
+            "price": 1000,
+            "phone": "123213"
         },
         {
-            "objectId": "1002",
-            "ownerId": "0001",
+            "_id": "1002",
+            "_ownerId": "0001",
             "brand": "brand2",
             "model": "model2",
             "description": "description2",
             "year": 2012,
-            "price": 2000
+            "price": 2000,
+            "phone": "12321313"
+
         }
   
     ]

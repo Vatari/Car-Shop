@@ -5,8 +5,7 @@ Website for selling and listing cars created by using lit-html and page. It uses
 Supported functionality: login, register, logout, create, edit, search and delete.
 Authorization for users uses token.
 
-package.json installs lite-server.
-
+package.json installs lite-server and mocha for testing.
 
 live demo here: https://project-car-shop.herokuapp.com/
 
@@ -19,3 +18,5 @@ Installation:
 5. run "npm run local"
 6. browser shoud open at http://localhost:3000 or http://127.0.0.1:3000
 7. enjoy
+
+To run tests use "npm test"

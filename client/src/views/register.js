@@ -56,6 +56,5 @@ async function onRegister(ctx, data, ev) {
 
   await userService.register(data.username, data.password);
   ev.target.reset();
-  clearUserData();
-  ctx.page.redirect("/login");
+  ctx.page.redirect("/");
 }

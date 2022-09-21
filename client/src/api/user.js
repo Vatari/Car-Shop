@@ -8,7 +8,7 @@ const endpoints = {
 };
 
 export async function login(username, password) {
-  const result = await api.post(endpoints.login, { login: username, password });
+  const result = await api.post(endpoints.login, { email: username, password });
   setUserData(result);
   return result;
 }
@@ -26,7 +26,7 @@ export async function logout() {
   return fetch(endpoints.logout, {
     method: "GET",
     headers: {
-      "user-token": getAccessToken(),
+      "accessToken": getAccessToken(),
     },
   });
 }

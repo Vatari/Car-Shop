@@ -24,7 +24,7 @@ const cardTemplate = (item) => html` <div class="listing">
       <h3>Price: ${item.price} $</h3>
     </div>
     <div class="data-buttons">
-      <a href="/details/${item.objectId}" class="button-carDetails">Details</a>
+      <a href="/details/${item._id}" class="button-carDetails">Details</a>
     </div>
   </div>
 </div>`;

@@ -12,13 +12,16 @@ const endpoints = {
 };
 
 export async function getRecent(ctx) {
-  const url = `cars?where=ownerId%3D'${ctx.user.objectId}'&sortBy=created%20desc`;
+  const userId = JSON.parse(localStorage.getItem("userData"));
+  const url = `cars?where=owner%3D%22${userId._id}%22`
+  //&sortBy=created%20desc`;
   return api.get(endpoints.recent + url);
 }
 
 export async function getAll() {
- /*  const data = await api.get(endpoints.listings);
+  /*  const data = await api.get(endpoints.listings);
   //setObjectData(data); */
+
   return api.get(endpoints.listings);
 }
 

@@ -5,7 +5,7 @@ export function getuserData() {
 export function getAccessToken() {
   const user = getuserData();
   if (user) {
-    return user["user-token"];
+    return user["accessToken"];
   } else {
     return null;
   }

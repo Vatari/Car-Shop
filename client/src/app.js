@@ -26,8 +26,8 @@ page("/listings", listingsPage);
 page("/login", loginPage);
 page("/register", registerPage);
 page("/create", createPage);
-page("/details/:objectId", detailsPage);
-page("/edit/:objectId", editPage);
+page("/details/:id", detailsPage);
+page("/edit/:id", editPage);
 page("/search", searchPage);
 page("/logout", onLogout);
 

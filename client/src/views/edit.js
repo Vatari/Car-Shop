@@ -74,14 +74,14 @@ const editTemplate = (item, onEdit) => html`
 `;
 
 export async function editPage(ctx) {
-  const itemId = ctx.params.objectId;
+  const itemId = ctx.params.id;
   const item = await service.getById(itemId);
 
   ctx.render(editTemplate(item, createSubmitHandler(ctx, onEdit)));
 }
 
 async function onEdit(ctx, item, ev) {
-  const itemId = ctx.params.objectId;
+  const itemId = ctx.params.id;
 
   if (item.year <= 0 && item.price <= 0) {
     return alert("Wrong year or price");
@@ -97,6 +97,7 @@ async function onEdit(ctx, item, ev) {
     year: Number(item.year),
     imageUrl: item.imageUrl,
     price: Number(item.price),
+    phone: item.phone,
   });
   ev.target.reset();
 

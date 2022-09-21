@@ -19,7 +19,7 @@ const detailsTemplate = (item, onDelete) => html`
       <p class="description-para">${item.description}</p>
       ${item.isOwner
         ? html`<div class="listings-buttons">
-            <a href="/edit/${item.objectId}" class="button-list">Edit</a>
+            <a href="/edit/${item._id}" class="button-list">Edit</a>
             <a @click=${onDelete} href="javascript:void(0)" class="button-list"
               >Delete</a
             >
@@ -30,11 +30,11 @@ const detailsTemplate = (item, onDelete) => html`
 `;
 
 export async function detailsPage(ctx) {
-  const itemId = ctx.params.objectId;
+  const itemId = ctx.params.id;
   const item = await service.getById(itemId);
 
   if (ctx.user) {
-    item.isOwner = ctx.user.objectId == item.ownerId;
+    item.isOwner = ctx.user._id == item.ownerId;
   }
 
   ctx.render(detailsTemplate(item, onDelete));

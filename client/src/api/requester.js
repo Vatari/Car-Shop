@@ -1,10 +1,7 @@
 import { clearUserData, getAccessToken } from "../util.js";
 import { notify } from "../views/notify.js";
 
-const appId = "A00A5B4F-A9B5-8699-FFD6-B1FDFA0D8F00";
-const apiKey = "6497A672-9CE3-4BA0-978C-1346660C63D5";
-
-const host = `https://eu-api.backendless.com/${appId}/${apiKey}`;
+const host = `http://localhost:4000`;
 
 async function request(method, url, data) {
   const options = {
@@ -19,9 +16,8 @@ async function request(method, url, data) {
 
   const userData = JSON.parse(localStorage.getItem("userData"));
 
-  
   if (userData !== null) {
-    options.headers["user-token"] = getAccessToken();
+    options.headers["accessToken"] = getAccessToken();
   }
 
   try {
@@ -31,6 +27,11 @@ async function request(method, url, data) {
       if (res.status == 403) {
         clearUserData();
       }
+
+      if (res.status == 498) {
+        clearUserData();
+      }
+
       const error = await res.json();
       throw Error(error.message);
     }

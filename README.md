@@ -4,7 +4,7 @@ Simple website for selling and listing cars created by using lit-html and page a
 It uses own REST server and MongoDB Atlas as database for the backend.
 
 Supported functionality: login, register, logout, create, edit, search and delete.
-Authorization for users uses JWT token.
+Authorization for users uses JWT token. Passwords for users are stored hashed in database using Bcrypt.
 
 package.json for client installs lite-server, lit-html and mocha for testing.
 

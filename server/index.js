@@ -32,7 +32,7 @@ async function start() {
   app.use("/data/cars", catalogController);
   app.use("/users", usersController);
 
-  app.listen(`${process.env.PORT}`, () =>
+  app.listen(4000, () =>
     console.log("REST server started successfully on port 4000")
   );
 }

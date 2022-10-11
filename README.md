@@ -16,7 +16,7 @@ live demo: http://85.130.7.156:2210
 
 1. Download zipped folder
 2. open server folder and run npm i
-3. start REST server using : nodemon index.js (in server folder, this will start REST service)
+3. start REST server using : nodemon index.js in server folder (this will start REST service)
 4. open client folder in terminal and run npm i
 5. run "npm run local" in client folder (this will start client)
 6. browser shoud open at http://localhost:4000 or http://127.0.0.1:4000

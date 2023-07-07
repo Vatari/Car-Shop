@@ -10,7 +10,7 @@ package.json for client installs lite-server, lit-html and mocha for testing.
 
 package.json install express and some other libraries nedeed
 
-live demo: http://b8e00a7b5ca8.sn.mynetname.net:2210
+live demo: http://71af08d6e733.sn.mynetname.net:2210
 
  Local installation:
 
